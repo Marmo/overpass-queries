@@ -1,0 +1,25 @@
+area["admin_level"="10"]["name"="Friedrichshain"]->.a;
+
+node(area.a)["shop"]->.nodes;
+(.nodes;node(area.a)["amenity"];)->.nodes;
+(.nodes;node(area.a)["leisure=tanning_salon"];)->.nodes;
+(.nodes;node(area.a)["tourism"];)->.nodes;
+
+(.nodes;node(area.a)["opening_hours"];)->.nodes;
+
+(.nodes; - node.nodes["amenity"="parking"];)->.nodes;
+(.nodes; - node.nodes(newer:"2012-11-01T00:00:00Z");)->.oldnodes;
+
+way(area.a)["shop"]->.ways;
+(.ways;way(area.a)["amenity"];)->.ways;
+(.ways;way(area.a)["leisure=tanning_salon"];)->.ways;
+(.ways;way(area.a)["tourism"];)->.ways;
+
+(.ways;way(area.a)["opening_hours"];)->.ways;
+
+(.ways; - way.ways["amenity"="parking"];)->.ways;
+
+((.ways; - way.ways(newer:"2012-11-01T00:00:00Z"););>;)->.oldways;(.oldnodes;.oldways;);
+out meta;
+>;
+
